@@ -3,11 +3,12 @@
 # To do
 
 - [x] It is based on tiles, like an old 2D Legend of Zelda game.
-- [ ] People are walking in a predictable pattern, turning right when they bump into something.
-    - [ ] If bump in middle of walking between tiles, reverse direction.
-- [ ] I'm programming, that a player interacts with the mobile phone by tapping any tile to place the virus.
+- [x] People are walking in a predictable pattern.
+    - [x] If bump in middle of walking between tiles, reverse direction.
+- [ ] A player interacts with the mobile phone by tapping any tile to place the virus.
 - [ ] When a person bumps into a virus tile, they pickup the virus and continue straight if they can.
 - [ ] After a second or two, the virus replicates in the person.
+- [ ] When bump into something, person turns right.
 - [ ] When a sick person bumps into another person, a copy of the virus transmits.
 - [ ] If a person gets four copies of the virus, the person immediately leaves.
 - [ ] The player earns a score by how many seconds it took them to get everyone in the restaurant sick.
