@@ -6,10 +6,12 @@
 - [x] People are walking in a predictable pattern.
     - [x] If bump in middle of walking between tiles, reverse direction.
 - [x] A player interacts with the mobile phone by tapping any tile to place the virus.
-- [ ] When a person begins to overlap a virus tile, they pickup the virus and continue straight if they can.
-- [ ] After a second or two, the virus replicates in the person.
+- [x] When a person begins to overlap a virus tile, they pickup the virus and continue straight if they can.
+- [x] After a second or two, the virus replicates in the person.
+- [x] When a sick person bumps into another person, a copy of the virus transmits.
+- [x] Some people go up and down.
+- [x] People do not get stuck in a corner.
 - [ ] When bump into something, person turns right.
-- [ ] When a sick person bumps into another person, a copy of the virus transmits.
 - [ ] If a person gets four copies of the virus, the person immediately leaves.
 - [ ] The player earns a score by how many seconds it took them to get everyone in the restaurant sick.
 - [ ] Cindy is illustrating a cute restaurant with people walking around.
