@@ -2,8 +2,9 @@
 
 # To do
 
-- [ ] It is based on tiles, like an old 2D Legend of Zelda game.
+- [x] It is based on tiles, like an old 2D Legend of Zelda game.
 - [ ] People are walking in a predictable pattern, turning right when they bump into something.
+    - [ ] If bump in middle of walking between tiles, reverse direction.
 - [ ] I'm programming, that a player interacts with the mobile phone by tapping any tile to place the virus.
 - [ ] When a person bumps into a virus tile, they pickup the virus and continue straight if they can.
 - [ ] After a second or two, the virus replicates in the person.

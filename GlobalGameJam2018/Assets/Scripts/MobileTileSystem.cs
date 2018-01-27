@@ -34,6 +34,11 @@ namespace Finegamedesign.Tiles
             m_Mobiles.Remove(mobile);
         }
 
+        public void OnCollision(MobileTile mobile)
+        {
+            mobile.velocity = Rotate(mobile.velocity, 180f);
+        }
+
         private void Update(float deltaTime)
         {
             foreach (MobileTile mobile in m_Mobiles)
@@ -53,6 +58,22 @@ namespace Finegamedesign.Tiles
             position.x += velocity.x * deltaTime;
             position.y += velocity.y * deltaTime;
             transform.position = position;
+        }
+
+        // Copied from
+        // https://answers.unity.com/questions/661383/whats-the-most-efficient-way-to-rotate-a-vector2-o.html
+        private static Vector2 Rotate(Vector2 v, float degrees)
+        {
+            float sin = Mathf.Sin(degrees * Mathf.Deg2Rad);
+            float cos = Mathf.Cos(degrees * Mathf.Deg2Rad);
+
+            float tx = v.x;
+            float ty = v.y;
+            v.x = (cos * tx) - (sin * ty);
+            v.y = (sin * tx) + (cos * ty);
+            return v;
+            // return Quaternion.Euler(0f, 0f, degrees) * v;
+            // return Quaternion.AngleAxis(degrees, Vector3.forward) * v;
         }
     }
 }
