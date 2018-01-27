@@ -5,7 +5,7 @@
 - [x] It is based on tiles, like an old 2D Legend of Zelda game.
 - [x] People are walking in a predictable pattern.
     - [x] If bump in middle of walking between tiles, reverse direction.
-- [ ] A player interacts with the mobile phone by tapping any tile to place the virus.
+- [x] A player interacts with the mobile phone by tapping any tile to place the virus.
 - [ ] When a person bumps into a virus tile, they pickup the virus and continue straight if they can.
 - [ ] After a second or two, the virus replicates in the person.
 - [ ] When bump into something, person turns right.
