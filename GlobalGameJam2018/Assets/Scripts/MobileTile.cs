@@ -17,5 +17,11 @@ namespace Finegamedesign.Tiles
         {
             MobileTileSystem.Instance.OnDisable(this);
         }
+
+        // Moving parallel to a wall will stay in collision.
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            MobileTileSystem.Instance.OnCollision(this);
+        }
     }
 }

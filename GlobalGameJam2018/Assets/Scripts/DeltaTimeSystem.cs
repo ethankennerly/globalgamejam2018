@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Finegamedesign.Utils
 {
-    public sealed class DeltaTimeView : MonoBehaviour
+    public sealed class DeltaTimeSystem : MonoBehaviour
     {
         public static event Action<float> OnDeltaTime;
 
