@@ -24,6 +24,8 @@
     - [ ] Move in current direction.
     - [ ] Bump.
 - [ ] Grid of tiles
+- [ ] Ensures system accessed before its component is enabled.
+    - [ ] Load systems in previous scene.  DontDestroyOnLoad.
 
 Entity moves.
 Collides.

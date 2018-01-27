@@ -5,15 +5,15 @@ namespace Finegamedesign.Utils
 {
     public sealed class DeltaTimeSystem : MonoBehaviour
     {
-        public static event Action<float> OnDeltaTime;
+        public static event Action<float> onDeltaTime;
 
         public void Update()
         {
-            if (OnDeltaTime == null)
+            if (onDeltaTime == null)
             {
                 return;
             }
-            OnDeltaTime(Time.deltaTime);
+            onDeltaTime(Time.deltaTime);
         }
     }
 }
