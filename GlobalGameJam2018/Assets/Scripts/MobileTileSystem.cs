@@ -12,12 +12,12 @@ namespace Finegamedesign.Tiles
 
         public MobileTileSystem()
         {
-            DeltaTimeSystem.OnDeltaTime += Update;
+            DeltaTimeSystem.onDeltaTime += Update;
         }
 
         ~MobileTileSystem()
         {
-            DeltaTimeSystem.OnDeltaTime -= Update;
+            DeltaTimeSystem.onDeltaTime -= Update;
         }
 
         public void OnEnable(MobileTile mobile)
