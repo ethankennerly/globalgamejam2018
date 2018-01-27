@@ -841,7 +841,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1128748981829622}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0.5, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4984516991550274}
@@ -992,7 +992,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1078829236175782}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4735915351263130}
@@ -1017,7 +1017,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!50 &50289701389591502
 Rigidbody2D:
   serializedVersion: 4
@@ -1037,7 +1037,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!50 &50342399562411868
 Rigidbody2D:
   serializedVersion: 4
@@ -1057,7 +1057,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!50 &50401775034889854
 Rigidbody2D:
   serializedVersion: 4
@@ -1077,7 +1077,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!50 &50435451204926780
 Rigidbody2D:
   serializedVersion: 4
@@ -1097,7 +1097,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!50 &50445419627758852
 Rigidbody2D:
   serializedVersion: 4
@@ -1117,7 +1117,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!50 &50530334751160940
 Rigidbody2D:
   serializedVersion: 4
@@ -1137,7 +1137,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!50 &50608195264446600
 Rigidbody2D:
   serializedVersion: 4
@@ -1157,7 +1157,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!50 &50682980128976910
 Rigidbody2D:
   serializedVersion: 4
@@ -1177,7 +1177,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!50 &50875308623205636
 Rigidbody2D:
   serializedVersion: 4
@@ -1197,7 +1197,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!50 &50892810323071922
 Rigidbody2D:
   serializedVersion: 4
@@ -1217,7 +1217,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!50 &50954171679232144
 Rigidbody2D:
   serializedVersion: 4
@@ -1237,7 +1237,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!50 &50977814117132014
 Rigidbody2D:
   serializedVersion: 4
@@ -1257,7 +1257,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61157798180171850
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -1596,7 +1596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrivalTime: 0
   nextTileSpeed: 0
-  velocity: {x: 1, y: 0}
+  velocity: {x: 0, y: -1}
 --- !u!114 &114082609577586270
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1707,7 +1707,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrivalTime: 0
   nextTileSpeed: 0
-  velocity: {x: 1, y: 0}
+  velocity: {x: 0, y: -1}
 --- !u!114 &114644274188722516
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1721,7 +1721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrivalTime: 0
   nextTileSpeed: 0
-  velocity: {x: 1, y: 0}
+  velocity: {x: 0, y: -1}
 --- !u!114 &114700327648320972
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1749,7 +1749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrivalTime: 0
   nextTileSpeed: 0
-  velocity: {x: 1, y: 0}
+  velocity: {x: 0, y: -1}
 --- !u!114 &114795699297649550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1763,7 +1763,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrivalTime: 0
   nextTileSpeed: 0
-  velocity: {x: 1, y: 0}
+  velocity: {x: 0, y: -1}
 --- !u!114 &114805783178701782
 MonoBehaviour:
   m_ObjectHideFlags: 1
