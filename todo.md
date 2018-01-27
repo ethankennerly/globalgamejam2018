@@ -41,7 +41,8 @@ Level 2.
 
 
 
-Right turner velocity x y.  Arrival time.  Will move.
+Mobile Tile velocity x y.  Arrival time.  Speed.
+Right turner
 OnEnable adds to system.
 
 System:
