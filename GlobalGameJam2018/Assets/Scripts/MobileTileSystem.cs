@@ -13,11 +13,13 @@ namespace Finegamedesign.Tiles
         public MobileTileSystem()
         {
             DeltaTimeSystem.onDeltaTime += Update;
+            MobileTile.onEnable += OnEnable;
         }
 
         ~MobileTileSystem()
         {
             DeltaTimeSystem.onDeltaTime -= Update;
+            MobileTile.onEnable -= OnEnable;
         }
 
         public void OnEnable(MobileTile mobile)
@@ -36,7 +38,11 @@ namespace Finegamedesign.Tiles
 
         public void OnCollision(MobileTile mobile)
         {
-            mobile.velocity = Rotate(mobile.velocity, 180f);
+            if (mobile.isColliding)
+            {
+                return;
+            }
+            mobile.isColliding = true;
         }
 
         private void Update(float deltaTime)
@@ -47,8 +53,15 @@ namespace Finegamedesign.Tiles
             }
         }
 
+        // Only responds to collision once per update,
+        // because collisions can happen many times.
         private void Move(MobileTile mobile, float deltaTime)
         {
+            if (mobile.isColliding)
+            {
+                mobile.isColliding = false;
+                mobile.velocity = Rotate(mobile.velocity, 180f);
+            }
             Move(mobile.transform, mobile.velocity, deltaTime);
         }
 
