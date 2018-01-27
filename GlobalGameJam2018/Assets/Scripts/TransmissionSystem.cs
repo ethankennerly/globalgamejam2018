@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace Finegamedesign.Virus
 {
-    [Serializable]
     public class TransmissionSystem : System<TransmissionSystem>
     {
         public TransmissionSystem()

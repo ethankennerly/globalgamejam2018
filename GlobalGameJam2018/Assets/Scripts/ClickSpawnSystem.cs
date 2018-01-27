@@ -6,7 +6,6 @@ using UnityEngine.Tilemaps;
 
 namespace Finegamedesign.Tiles
 {
-    [Serializable]
     public class ClickSpawnSystem : System<ClickSpawnSystem>
     {
         private List<InventoryObject> m_InventoryObjects;

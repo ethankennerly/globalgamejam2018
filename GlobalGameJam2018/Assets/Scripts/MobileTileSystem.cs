@@ -5,10 +5,9 @@ using UnityEngine;
 
 namespace Finegamedesign.Tiles
 {
-    [Serializable]
     public class MobileTileSystem : System<MobileTileSystem>
     {
-        private List<MobileTile> m_Mobiles;
+        private readonly List<MobileTile> m_Mobiles = new List<MobileTile>();
 
         public MobileTileSystem()
         {
@@ -57,6 +56,10 @@ namespace Finegamedesign.Tiles
         // because collisions can happen many times.
         private void Move(MobileTile mobile, float deltaTime)
         {
+            if (mobile == null)
+            {
+                return;
+            }
             if (mobile.isColliding)
             {
                 mobile.isColliding = false;

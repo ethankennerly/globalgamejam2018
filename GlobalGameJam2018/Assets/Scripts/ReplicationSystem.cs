@@ -5,10 +5,9 @@ using UnityEngine;
 
 namespace Finegamedesign.Virus
 {
-    [Serializable]
     public class ReplicationSystem : System<ReplicationSystem>
     {
-        private List<Virus> m_Viruses;
+        private readonly List<Virus> m_Viruses = new List<Virus>();
 
         public ReplicationSystem()
         {
