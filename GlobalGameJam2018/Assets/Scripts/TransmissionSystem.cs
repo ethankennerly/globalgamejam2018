@@ -33,13 +33,22 @@ namespace Finegamedesign.Virus
             Virus otherVirus = other.gameObject.GetComponentInChildren<Virus>();
             if (otherVirus == null)
             {
+                virus.count.value--;
+                GameObject cloneObject;
+                Virus clone;
                 if (virus.count.value > 0)
                 {
-                    return;
+                    cloneObject = GameObject.Instantiate(virus.gameObject);
+                    clone = cloneObject.GetComponent<Virus>();
                 }
-                virus.host = mobile;
-                virus.gameObject.transform.SetParent(other.gameObject.transform);
-                virus.gameObject.transform.localPosition = Vector3.zero;
+                else
+                {
+                    cloneObject = virus.gameObject;
+                    clone = virus;
+                }
+                clone.host = mobile;
+                cloneObject.transform.SetParent(other.gameObject.transform);
+                cloneObject.transform.localPosition = Vector3.zero;
                 return;
             }
             if (virus.count.value == otherVirus.count.value)
@@ -54,7 +63,6 @@ namespace Finegamedesign.Virus
             }
             virus.count.value--;
             otherVirus.count.value++;
-            return;
         }
     }
 }
