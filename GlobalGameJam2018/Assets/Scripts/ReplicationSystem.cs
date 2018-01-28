@@ -106,6 +106,7 @@ namespace Finegamedesign.Virus
                 {
                     onAllDied();
                 }
+                Reset();
             }
         }
     }

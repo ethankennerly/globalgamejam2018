@@ -10,16 +10,13 @@ namespace Finegamedesign.Virus
     {
         public static event Action onStartTimer;
 
-        private EndScreen m_EndScreen;
-
-        private bool m_IsGameOver = false;
+        public Animator animator { get; set; }
 
         public TimerSystem()
         {
             StartButton.onClick += StartTimer;
             RestartButton.onClick += Restart;
             ReplicationSystem.onAllDied += EndTimer;
-            EndScreen.onEnable += SetEndScreen;
             ClickPointSystem.disabledDuration = 1f;
         }
 
@@ -28,20 +25,14 @@ namespace Finegamedesign.Virus
             StartButton.onClick -= StartTimer;
             RestartButton.onClick += Restart;
             ReplicationSystem.onAllDied -= EndTimer;
-            EndScreen.onEnable -= SetEndScreen;
-        }
-
-        public void SetEndScreen(EndScreen endScreen)
-        {
-            m_EndScreen = endScreen;
-            endScreen.gameObject.SetActive(m_IsGameOver);
         }
 
         private void StartTimer(StartButton button)
         {
-            Debug.Log("StartTimer");
-            button.gameObject.SetActive(false);
-            m_EndScreen.gameObject.SetActive(false);
+            if (animator != null)
+            {
+                animator.Play("begin");
+            }
             if (onStartTimer == null)
             {
                 return;
@@ -51,18 +42,15 @@ namespace Finegamedesign.Virus
 
         private void EndTimer()
         {
-            if (m_EndScreen == null)
+            if (animator == null)
             {
                 return;
             }
-            m_IsGameOver = true;
-            m_EndScreen.gameObject.SetActive(true);
+            animator.Play("end");
         }
 
         private void Restart(RestartButton button)
         {
-            Debug.Log("Restart");
-            m_IsGameOver = false;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
