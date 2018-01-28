@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114822911892688086}
   - component: {fileID: 114727275235989564}
   - component: {fileID: 114914145334793892}
+  - component: {fileID: 114066711126675774}
   m_Layer: 0
   m_Name: Systems
   m_TagString: Untagged
@@ -46,6 +47,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114066711126675774
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1414130172734290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6b21695205456428608d72466b5a0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EndScreen: {fileID: 0}
 --- !u!114 &114426477610664056
 MonoBehaviour:
   m_ObjectHideFlags: 1

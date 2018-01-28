@@ -7,14 +7,19 @@ namespace Finegamedesign.Virus
 {
     public class ReplicationSystem : System<ReplicationSystem>
     {
+        public static event Action onAllDied;
+
         private readonly List<Virus> m_Viruses = new List<Virus>();
         private readonly List<Virus> m_Removing = new List<Virus>();
+
+        private int m_MaxViruses = 0;
 
         public ReplicationSystem()
         {
             Virus.onEnable += OnEnable;
             Virus.onDisable += OnDisable;
             DeltaTimeSystem.onDeltaTime += Update;
+            TimerSystem.onStartTimer += Reset;
         }
 
         ~ReplicationSystem()
@@ -22,6 +27,12 @@ namespace Finegamedesign.Virus
             Virus.onEnable -= OnEnable;
             Virus.onDisable -= OnDisable;
             DeltaTimeSystem.onDeltaTime -= Update;
+            TimerSystem.onStartTimer -= Reset;
+        }
+
+        private void Reset()
+        {
+            m_MaxViruses = 0;
         }
 
         private void OnEnable(Virus virus)
@@ -44,14 +55,10 @@ namespace Finegamedesign.Virus
 
         private void Update(float deltaTime)
         {
-            foreach (Virus virus in m_Removing)
-            {
-                m_Viruses.Remove(virus);
-            }
-            m_Removing.Clear();
+            RemoveDead();
             foreach (Virus virus in m_Viruses)
             {
-                if (!virus || virus == null || virus.host == null || virus.isDead)
+                if (virus == null || virus.host == null || virus.isDead)
                 {
                     continue;
                 }
@@ -60,6 +67,44 @@ namespace Finegamedesign.Virus
                 {
                     virus.count++;
                     virus.timeRemaining += virus.incrementPeriod;
+                }
+            }
+        }
+
+        private void RemoveDead()
+        {
+            foreach (Virus virus in m_Viruses)
+            {
+                if (virus == null || !virus.isDead)
+                {
+                    continue;
+                }
+                if (m_Removing.Contains(virus))
+                {
+                    continue;
+                }
+                m_Removing.Add(virus);
+            }
+            int previousViruses = m_Viruses.Count;
+            foreach (Virus virus in m_Removing)
+            {
+                m_Viruses.Remove(virus);
+            }
+            m_Removing.Clear();
+            int numViruses = m_Viruses.Count;
+            if (numViruses != previousViruses)
+            {
+                Debug.Log("RemoveDead: From " + previousViruses + " to " + numViruses);
+            }
+            if (numViruses > m_MaxViruses)
+            {
+                m_MaxViruses = numViruses;
+            }
+            else if (m_MaxViruses > 0 && numViruses == 0)
+            {
+                if (onAllDied != null)
+                {
+                    onAllDied();
                 }
             }
         }

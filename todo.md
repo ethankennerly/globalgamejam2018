@@ -14,14 +14,15 @@
 - [x] Animates how many copies of a virus.
 - [x] Animates time progressing to next virus replication.
 - [x] If a person gets four copies of the virus, the person immediately leaves.
+- [x] Read tap anywhere to place a virus.
+- [x] Start screen:  Germs!
+- [x] When no more viruses alive, end screen.
+- [x] End screen.
 
 # To do
 
-- [ ] Read tap anywhere to place a virus.
-- [ ] Start screen:  Germs!
-- [ ] End screen.
-- [ ] Score number of people sick.
-- [ ] The player earns a score by how many seconds it took them to get everyone in the restaurant sick.
+- [ ] End screen, score number of people sick.
+- [ ] End screen, score by how many seconds it took them to get everyone in the restaurant sick.
 - [ ] Animates person with copies of virus.
 - [ ] People do not get stuck in a corner.
 - [ ] When bump into something, person turns right.
