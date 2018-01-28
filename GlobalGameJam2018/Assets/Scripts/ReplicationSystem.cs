@@ -8,6 +8,7 @@ namespace Finegamedesign.Virus
     public class ReplicationSystem : System<ReplicationSystem>
     {
         private readonly List<Virus> m_Viruses = new List<Virus>();
+        private readonly List<Virus> m_Removing = new List<Virus>();
 
         public ReplicationSystem()
         {
@@ -34,14 +35,23 @@ namespace Finegamedesign.Virus
 
         private void OnDisable(Virus virus)
         {
-            m_Viruses.Remove(virus);
+            if (m_Removing.Contains(virus))
+            {
+                return;
+            }
+            m_Removing.Add(virus);
         }
 
         private void Update(float deltaTime)
         {
+            foreach (Virus virus in m_Removing)
+            {
+                m_Viruses.Remove(virus);
+            }
+            m_Removing.Clear();
             foreach (Virus virus in m_Viruses)
             {
-                if (virus.host == null)
+                if (!virus || virus == null || virus.host == null || virus.isDead)
                 {
                     continue;
                 }

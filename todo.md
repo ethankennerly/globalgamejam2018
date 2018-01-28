@@ -11,15 +11,18 @@
 - [x] When a sick person bumps into another person, a copy of the virus transmits.
 - [x] Some people go up and down.
 - [x] To make it plausible why everyone is walking, and why there are arbitrarily placed obstacles, we were thinking some obstacles look a buffet, counter, or bar.
+- [x] Animates how many copies of a virus.
+- [x] Animates time progressing to next virus replication.
 
 # To do
 
-- [ ] Animates how many copies of a virus.
-- [ ] Animates time progressing to next virus replication.
 - [ ] If a person gets four copies of the virus, the person immediately leaves.
-- [ ] People do not get stuck in a corner.
-- [ ] When bump into something, person turns right.
+- [ ] Animates person with copies of virus.
 - [ ] The player earns a score by how many seconds it took them to get everyone in the restaurant sick.
+- [ ] People do not get stuck in a corner.
+- [ ] Start screen:  Germs!
+- [ ] End screen.
+- [ ] When bump into something, person turns right.
 - [ ] Level 2.
 - [ ] Read how many infected.
 - [ ] Read best time.

@@ -12,7 +12,7 @@ namespace Finegamedesign.Virus
 
         private int m_Count = 1;
         private int m_Min = 0;
-        private int m_Max = 4;
+        private int m_Max = 5;
 
         public int count
         {
@@ -35,6 +35,16 @@ namespace Finegamedesign.Virus
                 }
                 onCountChanged(this, previousCount, value);
             }
+        }
+
+        public bool isFatal
+        {
+            get { return m_Count >= m_Max - 1; }
+        }
+
+        public bool isDead
+        {
+            get { return m_Count >= m_Max; }
         }
 
         public float incrementPeriod = 1f;
