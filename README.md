@@ -1,6 +1,21 @@
-# globalgamejam2018
-Global Game Jam 2018 entry by Cindy Lee and Ethan Kennerly, January 26-28.
+# Infect'em All
 
-Play here:
+Tap ONE person to infect.
 
-<http://finegamedesign.com/infectemall>
+Theme "Transmission," in Global Game Jam 2018, January 26-28.
+
+- Art: Cindy Lee
+- Audio: Matthew Frederick Chin
+- Engineering: Ethan Kennerly
+
+Play on WebGL here:
+
+<http://finegamedesign.com/infectemall/webgl>
+
+Play on Android here:
+
+<http://finegamedesign.com/infectemall/infectemall.apk>
+
+Game jam site:
+
+<https://globalgamejam.org/2018/games/infectem-all>
