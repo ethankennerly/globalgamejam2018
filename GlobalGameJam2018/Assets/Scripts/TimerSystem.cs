@@ -11,6 +11,9 @@ namespace Finegamedesign.Virus
         public static event Action onStartTimer;
 
         public Animator animator { get; set; }
+        public string[] sceneNames { get; set; }
+
+        private int m_SceneIndex = 0;
 
         private bool m_IsGameOver = false;
 
@@ -19,7 +22,7 @@ namespace Finegamedesign.Virus
         public TimerSystem()
         {
             StartButton.onClick += StartTimer;
-            RestartButton.onClick += Restart;
+            RestartButton.onClick += NextScene;
             ReplicationSystem.onAllDied += EndTimer;
             ClickPointSystem.disabledDuration = 1f;
             m_IsGameOver = false;
@@ -29,7 +32,7 @@ namespace Finegamedesign.Virus
         ~TimerSystem()
         {
             StartButton.onClick -= StartTimer;
-            RestartButton.onClick += Restart;
+            RestartButton.onClick += NextScene;
             ReplicationSystem.onAllDied -= EndTimer;
         }
 
@@ -40,7 +43,7 @@ namespace Finegamedesign.Virus
         {
             if (m_IsGameOver)
             {
-                Restart();
+                NextScene();
             }
             if (m_IsVerbose)
             {
@@ -77,15 +80,20 @@ namespace Finegamedesign.Virus
             animator.Play("end");
         }
 
-        private void Restart(RestartButton button = null)
+        private void NextScene(RestartButton button = null)
         {
             if (m_IsVerbose)
             {
-                Debug.Log("TimerSystems.Restart");
+                Debug.Log("TimerSystems.NextScene");
             }
             m_IsGameOver = false;
             SetGamePlaying(false);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            ++m_SceneIndex;
+            if (m_SceneIndex >= sceneNames.Length)
+            {
+                m_SceneIndex = 0;
+            }
+            SceneManager.LoadScene(sceneNames[m_SceneIndex]);
             m_IsGameOver = false;
             SetGamePlaying(false);
         }
