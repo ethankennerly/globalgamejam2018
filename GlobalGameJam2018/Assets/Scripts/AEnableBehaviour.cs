@@ -9,7 +9,7 @@ namespace Finegamedesign.Utils
         public static event Action<T> onEnable;
         public static event Action<T> onDisable;
 
-        protected virtual void OnEnable()
+        private void OnEnable()
         {
             if (onEnable == null)
             {
@@ -18,7 +18,7 @@ namespace Finegamedesign.Utils
             onEnable((T)this);
         }
 
-        protected virtual void OnDisable()
+        private void OnDisable()
         {
             if (onDisable == null)
             {
