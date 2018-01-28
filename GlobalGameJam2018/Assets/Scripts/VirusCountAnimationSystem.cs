@@ -8,6 +8,8 @@ namespace Finegamedesign.Virus
 {
     public class VirusCountAnimationSystem : System<VirusCountAnimationSystem>
     {
+        public static event Action onFatal;
+
         public VirusCountAnimationSystem()
         {
             Virus.onCountChanged += OnCountChanged;
@@ -45,6 +47,10 @@ namespace Finegamedesign.Virus
             }
             if (!virus.isDead)
             {
+                if (onFatal != null)
+                {
+                    onFatal();
+                }
                 return false;
             }
             hostObject.SetActive(false);

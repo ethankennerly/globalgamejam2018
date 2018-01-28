@@ -6,11 +6,11 @@ namespace Finegamedesign.Virus
     public sealed class TimerSystemView : SystemView<TimerSystem>
     {
         [SerializeField]
-        private EndScreen m_EndScreen;
+        private Animator m_Animator;
 
         private void OnEnable()
         {
-            System.SetEndScreen(m_EndScreen);
+            System.animator = m_Animator;
         }
     }
 }
