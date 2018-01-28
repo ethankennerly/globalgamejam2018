@@ -11,8 +11,10 @@ namespace Finegamedesign.Utils
         public static event Action<float, float> onViewportXY;
         public static event Action<float, float> onAxisXY;
 
-        public static event Action<Vector3> onCollisionEnter;
-        public static event Action<Vector2> onCollisionEnter2D;
+        public static event Action<Vector3> onCollisionPoint;
+        public static event Action<Vector2> onCollisionPoint2D;
+        public static event Action<Collider> onCollisionEnter;
+        public static event Action<Collider2D> onCollisionEnter2D;
 
         private static float s_DisabledDuration = 0.25f;
         public static float disabledDuration
@@ -31,7 +33,7 @@ namespace Finegamedesign.Utils
         private static Vector3 s_Viewport = new Vector3();
         private static Vector2 s_Axis = new Vector2();
 
-        private static bool s_IsVerbose = false;
+        private static bool s_IsVerbose = true;
 
         // Caches time to ignore multiple calls per frame.
         //
@@ -55,6 +57,7 @@ namespace Finegamedesign.Utils
                 return;
             }
             Raycast();
+            Raycast2D();
             OverlapPoint();
             Screen();
             Viewport();
@@ -92,13 +95,37 @@ namespace Finegamedesign.Utils
                 return false;
             }
             s_RaycastHit = hit.point;
+            if (onCollisionPoint != null)
+            {
+                onCollisionPoint(s_RaycastHit);
+            }
             if (onCollisionEnter != null)
             {
-                onCollisionEnter(s_RaycastHit);
+                onCollisionEnter(hit.collider);
             }
             if (s_IsVerbose)
             {
                 Debug.Log("ClickPoint.RayCast: " + s_RaycastHit);
+            }
+            return true;
+        }
+
+        private static bool Raycast2D()
+        {
+            Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 origin = new Vector2(point.x, point.y);
+            RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.zero);
+            if (hit == null || hit.collider == null)
+            {
+                return false;
+            }
+            if (onCollisionEnter2D != null)
+            {
+                onCollisionEnter2D(hit.collider);
+            }
+            if (s_IsVerbose)
+            {
+                Debug.Log("ClickPoint.Raycast2D: " + hit.collider);
             }
             return true;
         }
@@ -112,9 +139,9 @@ namespace Finegamedesign.Utils
             {
                 return false;
             }
-            if (onCollisionEnter2D != null)
+            if (onCollisionPoint2D != null)
             {
-                onCollisionEnter2D(s_OverlapPoint);
+                onCollisionPoint2D(s_OverlapPoint);
             }
             if (s_IsVerbose)
             {
