@@ -60,9 +60,6 @@ namespace Finegamedesign.Virus
                 return false;
             }
             Debug.Log("Destroy host and virus.");
-            // GameObject.Destroy(hostObject);
-            // GameObject.Destroy(virus.gameObject);
-            // virus.host = null;
             hostObject.SetActive(false);
             virus.gameObject.SetActive(false);
             return true;
