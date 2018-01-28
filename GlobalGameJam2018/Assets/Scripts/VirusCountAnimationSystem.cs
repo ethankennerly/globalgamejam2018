@@ -14,7 +14,7 @@ namespace Finegamedesign.Virus
 
         ~VirusCountAnimationSystem()
         {
-            Virus.onCountChanged += AnimateCount;
+            Virus.onCountChanged -= AnimateCount;
         }
 
         // When updating animation duration, also update duration in virus data.
@@ -28,7 +28,7 @@ namespace Finegamedesign.Virus
             {
                 return;
             }
-            string state = "virus_" + currentCount;
+            string state = "count_" + currentCount;
             virus.animator.Play(state, -1, 0f);
         }
     }
