@@ -18,10 +18,16 @@
 - [x] Start screen:  Germs!
 - [x] When no more viruses alive, end screen.
 - [x] End screen.
+- [x] Small level, easy to get all people sick.
+- [x] Jennifer Russ plays on Android.
+- [x] Read/Write colliders.  https://answers.unity.com/questions/625645/problem-with-adding-dynamic-polygon-collider-2d.html
 
 # To do
 
-- [ ] Small level, easy to get all people sick.
+- [ ] Jennifer expects to see the objective.
+- [ ] Jennifer taps to place more germs.
+- [ ] Jennifer reads instructions and taps.  She expects to be able to place germ.  But germ was already placed.
+- [ ] End.  Jennifer keeps tapping to place a germ.  Accidentally restarts without recognizing end screen.
 - [ ] A virus can be placed again if it hasn't been picked up already.
 - [ ] End screen, score number of people sick.
 - [ ] End screen, score by how many seconds it took them to get everyone in the restaurant sick.
@@ -31,6 +37,7 @@
 - [ ] Level 2.
 - [ ] Read how many infected.
 - [ ] Read best time.
+
 
 # Technical design
 
