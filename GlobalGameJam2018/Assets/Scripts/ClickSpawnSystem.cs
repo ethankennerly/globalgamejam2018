@@ -52,6 +52,10 @@ namespace Finegamedesign.Tiles
 
         public void TrySpawn(Vector3 position)
         {
+            if (!ClickPointSystem.DisableTemporarily())
+            {
+                return;
+            }
             if (!SetTilePosition(m_Tilemap, ref position))
             {
                 return;

@@ -14,6 +14,15 @@ namespace Finegamedesign.Utils
         public static event Action<Vector3> onCollisionEnter;
         public static event Action<Vector2> onCollisionEnter2D;
 
+        private static float s_DisabledDuration = 0.25f;
+        public static float disabledDuration
+        {
+            get { return s_DisabledDuration; }
+            set { s_DisabledDuration = value; }
+        }
+        private static float s_UpdateTime = -1.0f;
+        private static float s_ClickTime = -1.0f;
+
         private static Vector2 s_OverlapPoint = new Vector2();
 
         private static Vector3 s_RaycastHit = new Vector3();
@@ -22,9 +31,58 @@ namespace Finegamedesign.Utils
         private static Vector3 s_Viewport = new Vector3();
         private static Vector2 s_Axis = new Vector2();
 
-        private static float s_UpdateTime = -1.0f;
+        private static bool s_IsVerbose = true;
 
-        private static bool s_IsVerbose = false;
+        // Caches time to ignore multiple calls per frame.
+        //
+        // Ignores if over UI object.
+        // Otherwise, a tap on a button is also reacted as a tap in viewport.
+        // For example, in Deadly Diver, a viewport tap moves the diver.
+        public static void Update()
+        {
+            float time = Time.time;
+            if (s_UpdateTime == time)
+            {
+                return;
+            }
+            s_UpdateTime = time;
+            if (!Input.GetMouseButtonDown(0))
+            {
+                return;
+            }
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+            Raycast();
+            OverlapPoint();
+            Screen();
+            Viewport();
+        }
+
+        // Returns if currently enabled, else already disabled.
+        // Because of click-point update racing between other updates,
+        // each caller disables individually.
+        public static bool DisableTemporarily()
+        {
+            bool enabled = s_ClickTime < 0f;
+            float time = Time.time;
+            if (!enabled)
+            {
+                float enabledTime = s_ClickTime + s_DisabledDuration;
+                enabled = time >= enabledTime;
+            }
+            if (enabled)
+            {
+                s_ClickTime = time;
+            }
+            if (s_IsVerbose)
+            {
+                Debug.Log("ClickPointSystem.enabled: " + enabled
+                    + " since " + s_ClickTime + " for " + s_DisabledDuration);
+            }
+            return enabled;
+        }
 
         private static bool Raycast()
         {
@@ -102,32 +160,6 @@ namespace Finegamedesign.Utils
                 Debug.Log("ClickPoint.Screen: " + s_Click);
             }
             return true;
-        }
-
-        // Caches time to ignore multiple calls per frame.
-        //
-        // Ignores if over UI object.
-        // Otherwise, a tap on a button is also reacted as a tap in viewport.
-        // For example, in Deadly Diver, a viewport tap moves the diver.
-        public static void Update()
-        {
-            if (s_UpdateTime == Time.time)
-            {
-                return;
-            }
-            s_UpdateTime = Time.time;
-            if (!Input.GetMouseButtonDown(0))
-            {
-                return;
-            }
-            if (EventSystem.current.IsPointerOverGameObject())
-            {
-                return;
-            }
-            Raycast();
-            OverlapPoint();
-            Screen();
-            Viewport();
         }
     }
 }

@@ -25,6 +25,10 @@ namespace Finegamedesign.Utils
 
         private void OnClick()
         {
+            if (!ClickPointSystem.DisableTemporarily())
+            {
+                return;
+            }
             if (onClick == null)
             {
                 return;

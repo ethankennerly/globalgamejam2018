@@ -21,24 +21,32 @@
 - [x] Small level, easy to get all people sick.
 - [x] Jennifer Russ plays on Android.
 - [x] Read/Write colliders.  https://answers.unity.com/questions/625645/problem-with-adding-dynamic-polygon-collider-2d.html
-
-# To do
-
 - [x] Jennifer expects to see the objective.
     - [x] Title "Infect'em All"
 - [x] Jennifer taps to place more germs.
     - [x] Instruct "Tap to place ONE germ"
-- [ ] Jennifer reads instructions and taps.  She expects to be able to place germ.  But germ was already placed.
-- [ ] End.  Jennifer keeps tapping to place a germ.  Accidentally restarts without recognizing end screen.
-- [ ] A virus can be placed again if it hasn't been picked up already.
+- [x] Jennifer reads instructions and taps.  She expects to be able to place germ.  But germ was already placed.
+    - [x] Disables tapping for one second.
+- [x] End.  Jennifer keeps tapping to place a germ.  Accidentally restarts without recognizing end screen.
+    - [x] Disables tapping for one second.
+- [x] Hear loop, place germ, end.
+
+# To do
+
+- [ ] Fade out loop on end.
+- [ ] Any player can always end play.
+    - [ ] Only tap on person.
+    - [ ] Person covers everywhere.
+    - [ ] A virus can be replaced again if it hasn't been picked up already.
 - [ ] End screen, score number of people sick.
 - [ ] End screen, score by how many seconds it took them to get everyone in the restaurant sick.
+- [ ] Conveniently edit person with a prefab.
 - [ ] Animates person with copies of virus.
 - [ ] People do not get stuck in a corner.
-- [ ] When bump into something, person turns right.
 - [ ] Level 2.
 - [ ] Read how many infected.
 - [ ] Read best time.
+- [ ] When bump into something, person turns right.
 
 
 # Technical design

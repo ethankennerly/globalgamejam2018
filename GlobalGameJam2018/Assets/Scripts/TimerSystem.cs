@@ -12,7 +12,7 @@ namespace Finegamedesign.Virus
 
         private EndScreen m_EndScreen;
 
-        private bool isGameOver = false;
+        private bool m_IsGameOver = false;
 
         public TimerSystem()
         {
@@ -20,6 +20,7 @@ namespace Finegamedesign.Virus
             RestartButton.onClick += Restart;
             ReplicationSystem.onAllDied += EndTimer;
             EndScreen.onEnable += SetEndScreen;
+            ClickPointSystem.disabledDuration = 1f;
         }
 
         ~TimerSystem()
@@ -33,11 +34,12 @@ namespace Finegamedesign.Virus
         public void SetEndScreen(EndScreen endScreen)
         {
             m_EndScreen = endScreen;
-            endScreen.gameObject.SetActive(isGameOver);
+            endScreen.gameObject.SetActive(m_IsGameOver);
         }
 
         private void StartTimer(StartButton button)
         {
+            Debug.Log("StartTimer");
             button.gameObject.SetActive(false);
             m_EndScreen.gameObject.SetActive(false);
             if (onStartTimer == null)
@@ -53,14 +55,14 @@ namespace Finegamedesign.Virus
             {
                 return;
             }
-            isGameOver = true;
+            m_IsGameOver = true;
             m_EndScreen.gameObject.SetActive(true);
         }
 
         private void Restart(RestartButton button)
         {
             Debug.Log("Restart");
-            isGameOver = false;
+            m_IsGameOver = false;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
