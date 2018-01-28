@@ -10,6 +10,8 @@ namespace Finegamedesign.Virus
     {
         public static event Action onFatal;
 
+        private readonly HashSet<MobileTile> m_Fatalities = new HashSet<MobileTile>();
+
         public VirusCountAnimationSystem()
         {
             Virus.onCountChanged += OnCountChanged;
@@ -47,6 +49,11 @@ namespace Finegamedesign.Virus
             }
             if (!virus.isDead)
             {
+                if (m_Fatalities.Contains(mobile))
+                {
+                    return false;
+                }
+                m_Fatalities.Add(mobile);
                 if (onFatal != null)
                 {
                     onFatal();
