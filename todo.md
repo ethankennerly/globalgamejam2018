@@ -35,6 +35,7 @@
 # To do
 
 - [ ] Conveniently edit horizontal and vertical person with a prefab.
+- [ ] Always restarts and reloads scene.
 - [ ] Any player can always end play.
     - [ ] Only tap on person.
     - [ ] Person covers everywhere.
