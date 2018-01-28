@@ -92,10 +92,6 @@ namespace Finegamedesign.Virus
             }
             m_Removing.Clear();
             int numViruses = m_Viruses.Count;
-            if (numViruses != previousViruses)
-            {
-                Debug.Log("RemoveDead: From " + previousViruses + " to " + numViruses);
-            }
             if (numViruses > m_MaxViruses)
             {
                 m_MaxViruses = numViruses;

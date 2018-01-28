@@ -30,17 +30,17 @@
 - [x] End.  Jennifer keeps tapping to place a germ.  Accidentally restarts without recognizing end screen.
     - [x] Disables tapping for one second.
 - [x] Hear loop, place germ, end.
+- [x] Fade out loop on end.
 
 # To do
 
-- [ ] Fade out loop on end.
+- [ ] Conveniently edit horizontal and vertical person with a prefab.
 - [ ] Any player can always end play.
     - [ ] Only tap on person.
     - [ ] Person covers everywhere.
     - [ ] A virus can be replaced again if it hasn't been picked up already.
 - [ ] End screen, score number of people sick.
 - [ ] End screen, score by how many seconds it took them to get everyone in the restaurant sick.
-- [ ] Conveniently edit person with a prefab.
 - [ ] Animates person with copies of virus.
 - [ ] People do not get stuck in a corner.
 - [ ] Level 2.
