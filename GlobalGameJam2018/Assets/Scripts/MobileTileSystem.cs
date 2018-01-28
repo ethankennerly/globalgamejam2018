@@ -120,14 +120,16 @@ namespace Finegamedesign.Tiles
 
         private static bool HasTileInFront(Tilemap tilemap, MobileTile mobile)
         {
-            return HasTile(tilemap, GetInFront(mobile));
+            return HasTile(tilemap, GetInFront(mobile, 0.75f));
         }
 
-        private static Vector3 GetInFront(MobileTile mobile)
+        private static Vector3 GetInFront(MobileTile mobile, float distance)
         {
             Vector3 position = mobile.transform.position;
             position = new Vector3(position.x, position.y, position.z);
             Vector2 velocity = new Vector2(mobile.velocity.x, mobile.velocity.y);
+            velocity.Normalize();
+            velocity *= distance;
             position.x += velocity.x;
             position.y += velocity.y;
             return position;

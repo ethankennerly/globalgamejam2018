@@ -14,6 +14,7 @@ namespace Finegamedesign.Virus
         private int m_Min = 0;
         private int m_Max = 5;
 
+        // Once fatal will not lower.
         public int count
         {
             get
@@ -24,6 +25,10 @@ namespace Finegamedesign.Virus
             {
                 value = Mathf.Clamp(value, m_Min, m_Max);
                 if (m_Count == value)
+                {
+                    return;
+                }
+                if (value < m_Count && isFatal)
                 {
                     return;
                 }
@@ -47,8 +52,8 @@ namespace Finegamedesign.Virus
             get { return m_Count >= m_Max; }
         }
 
-        public float incrementPeriod = 1f;
-        public float timeRemaining = 1f;
+        public float incrementPeriod = 2f;
+        public float timeRemaining = 2f;
         public MobileTile host;
         public Animator animator;
 

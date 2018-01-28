@@ -18,6 +18,7 @@ namespace Finegamedesign.Virus
             Virus.onTrigger -= TryTransmit;
         }
 
+        // Does
         private void TryTransmit(Virus virus, Collider2D other)
         {
             if (virus.host != null && virus.count < 1)
