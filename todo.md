@@ -24,8 +24,10 @@
 
 # To do
 
-- [ ] Jennifer expects to see the objective.
-- [ ] Jennifer taps to place more germs.
+- [x] Jennifer expects to see the objective.
+    - [x] Title "Infect'em All"
+- [x] Jennifer taps to place more germs.
+    - [x] Instruct "Tap to place ONE germ"
 - [ ] Jennifer reads instructions and taps.  She expects to be able to place germ.  But germ was already placed.
 - [ ] End.  Jennifer keeps tapping to place a germ.  Accidentally restarts without recognizing end screen.
 - [ ] A virus can be placed again if it hasn't been picked up already.
