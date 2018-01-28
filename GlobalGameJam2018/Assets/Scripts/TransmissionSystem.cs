@@ -20,10 +20,6 @@ namespace Finegamedesign.Virus
 
         private void TryTransmit(Virus virus, Collider2D other)
         {
-            if (virus.isFatal)
-            {
-                return;
-            }
             if (virus.host != null && virus.count < 1)
             {
                 return;
@@ -34,10 +30,6 @@ namespace Finegamedesign.Virus
                 return;
             }
             Virus otherVirus = other.gameObject.GetComponentInChildren<Virus>();
-            if (otherVirus != null && otherVirus.isFatal)
-            {
-                return;
-            }
             if (otherVirus == null)
             {
                 virus.count--;

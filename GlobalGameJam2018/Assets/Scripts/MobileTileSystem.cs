@@ -9,6 +9,8 @@ namespace Finegamedesign.Tiles
     {
         private readonly List<MobileTile> m_Mobiles = new List<MobileTile>();
 
+        private float speed = 2f;
+
         public MobileTileSystem()
         {
             DeltaTimeSystem.onDeltaTime += Update;
@@ -65,7 +67,7 @@ namespace Finegamedesign.Tiles
                 mobile.isColliding = false;
                 mobile.velocity = Rotate(mobile.velocity, 180f);
             }
-            Move(mobile.transform, mobile.velocity, deltaTime);
+            Move(mobile.transform, mobile.velocity, deltaTime * speed);
         }
 
         private static void Move(Transform transform, Vector2 velocity, float deltaTime)

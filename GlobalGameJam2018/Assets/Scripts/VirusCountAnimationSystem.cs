@@ -36,7 +36,6 @@ namespace Finegamedesign.Virus
             GameObject hostObject = virus.host.gameObject;
             if (hostObject == null)
             {
-                Debug.Log("Fatal but no host");
                 return true;
             }
             MobileTile mobile = hostObject.GetComponent<MobileTile>();
@@ -44,22 +43,10 @@ namespace Finegamedesign.Virus
             {
                 mobile.velocity = new Vector2();
             }
-            Rigidbody2D body = hostObject.GetComponent<Rigidbody2D>();
-            if (body != null)
-            {
-                GameObject.Destroy(body);
-            }
-            Collider2D collider = hostObject.GetComponent<Collider2D>();
-            if (collider != null)
-            {
-                GameObject.Destroy(collider);
-            }
             if (!virus.isDead)
             {
-                Debug.Log("Not dead yet");
                 return false;
             }
-            Debug.Log("Destroy host and virus.");
             hostObject.SetActive(false);
             virus.gameObject.SetActive(false);
             return true;

@@ -21,6 +21,8 @@
 
 # To do
 
+- [ ] Small level, easy to get all people sick.
+- [ ] A virus can be placed again if it hasn't been picked up already.
 - [ ] End screen, score number of people sick.
 - [ ] End screen, score by how many seconds it took them to get everyone in the restaurant sick.
 - [ ] Animates person with copies of virus.
