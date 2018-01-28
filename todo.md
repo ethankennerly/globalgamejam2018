@@ -1,22 +1,28 @@
 # Features
 
-# To do
-
 - [x] It is based on tiles, like an old 2D Legend of Zelda game.
 - [x] People are walking in a predictable pattern.
-    - [x] If bump in middle of walking between tiles, reverse direction.
+- [x] If bump in middle of walking between tiles, reverse direction.
 - [x] A player interacts with the mobile phone by tapping any tile to place the virus.
+- [x] The whole restaurant fits on the screen of a mobile phone.
+- [x] A cute restaurant with people walking around.
 - [x] When a person begins to overlap a virus tile, they pickup the virus and continue straight if they can.
 - [x] After a second or two, the virus replicates in the person.
 - [x] When a sick person bumps into another person, a copy of the virus transmits.
 - [x] Some people go up and down.
-- [x] People do not get stuck in a corner.
-- [ ] When bump into something, person turns right.
+- [x] To make it plausible why everyone is walking, and why there are arbitrarily placed obstacles, we were thinking some obstacles look a buffet, counter, or bar.
+
+# To do
+
+- [ ] Animates how many copies of a virus.
+- [ ] Animates time progressing to next virus replication.
 - [ ] If a person gets four copies of the virus, the person immediately leaves.
+- [ ] People do not get stuck in a corner.
+- [ ] When bump into something, person turns right.
 - [ ] The player earns a score by how many seconds it took them to get everyone in the restaurant sick.
-- [ ] Cindy is illustrating a cute restaurant with people walking around.
-- [ ] The whole restaurant fits on the screen of a mobile phone.
-- [ ] To make it plausible why everyone is walking, and why there are arbitrarily placed obstacles, we were thinking some obstacles look a buffet, counter, or bar.
+- [ ] Level 2.
+- [ ] Read how many infected.
+- [ ] Read best time.
 
 # Technical design
 

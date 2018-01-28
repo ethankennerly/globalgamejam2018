@@ -20,7 +20,7 @@ namespace Finegamedesign.Virus
 
         private void TryTransmit(Virus virus, Collider2D other)
         {
-            if (virus.host != null && virus.count.value < 1)
+            if (virus.host != null && virus.count < 1)
             {
                 return;
             }
@@ -32,10 +32,10 @@ namespace Finegamedesign.Virus
             Virus otherVirus = other.gameObject.GetComponentInChildren<Virus>();
             if (otherVirus == null)
             {
-                virus.count.value--;
+                virus.count--;
                 GameObject cloneObject;
                 Virus clone;
-                if (virus.count.value > 0)
+                if (virus.count > 0)
                 {
                     cloneObject = GameObject.Instantiate(virus.gameObject);
                     clone = cloneObject.GetComponent<Virus>();
@@ -47,21 +47,21 @@ namespace Finegamedesign.Virus
                 }
                 clone.host = mobile;
                 cloneObject.transform.SetParent(other.gameObject.transform);
-                cloneObject.transform.localPosition = Vector3.zero;
+                cloneObject.transform.localPosition = new Vector3(0f, 0f, -0.01f);
                 return;
             }
-            if (virus.count.value == otherVirus.count.value)
+            if (virus.count == otherVirus.count)
             {
                 return;
             }
-            if (virus.count.value < otherVirus.count.value)
+            if (virus.count < otherVirus.count)
             {
                 Virus swap = virus;
                 virus = otherVirus;
                 otherVirus = swap;
             }
-            virus.count.value--;
-            otherVirus.count.value++;
+            virus.count--;
+            otherVirus.count++;
         }
     }
 }

@@ -6,9 +6,9 @@ using UnityEngine.Tilemaps;
 
 namespace Finegamedesign.Tiles
 {
-    public class ClickSpawnSystem : System<ClickSpawnSystem>
+    public sealed class ClickSpawnSystem : System<ClickSpawnSystem>
     {
-        private List<InventoryObject> m_InventoryObjects;
+        private List<InventoryObject> m_InventoryObjects = new List<InventoryObject>();
 
         private Tilemap m_Tilemap;
 

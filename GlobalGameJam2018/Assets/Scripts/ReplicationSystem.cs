@@ -48,7 +48,7 @@ namespace Finegamedesign.Virus
                 virus.timeRemaining -= deltaTime;
                 if (virus.timeRemaining <= 0f)
                 {
-                    virus.count.value ++;
+                    virus.count++;
                     virus.timeRemaining += virus.incrementPeriod;
                 }
             }
