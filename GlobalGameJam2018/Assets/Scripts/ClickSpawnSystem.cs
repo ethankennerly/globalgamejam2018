@@ -25,7 +25,9 @@ namespace Finegamedesign.Tiles
                 ClickPointSystem.onCollisionEnter2D += TrySpawnOnMobileTile;
             }
             InventoryObject.onEnable += OnEnable;
+            InventoryObject.onDisable += OnDisable;
             SpawnMap.onEnable += OnEnable;
+            SpawnMap.onDisable += OnDisable;
         }
 
         ~ClickSpawnSystem()
@@ -39,7 +41,9 @@ namespace Finegamedesign.Tiles
                 ClickPointSystem.onCollisionEnter2D -= TrySpawnOnMobileTile;
             }
             InventoryObject.onEnable -= OnEnable;
-            SpawnMap.onEnable += OnEnable;
+            InventoryObject.onDisable -= OnDisable;
+            SpawnMap.onEnable -= OnEnable;
+            SpawnMap.onDisable -= OnDisable;
         }
 
         private void OnEnable(InventoryObject inventory)

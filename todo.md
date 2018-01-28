@@ -39,11 +39,13 @@
     - [ ] A virus can be replaced again if it hasn't been picked up already.
 - [x] End screen, score number of people sick.
 - [x] End screen, score by how many seconds it took them to get everyone in the restaurant sick.
+- [x] Animates person with copies of virus.
 
 # To do
 
-- [ ] Animates person with copies of virus.
 - [ ] People do not get stuck in a corner.
+    - [ ] When arriving at next tile, check if following tile is obstructed.
+- [ ] Lower loop volume.
 - [ ] If get all sick, Level 2.
 - [ ] Read best time.
 - [ ] When bump into something, person turns right.

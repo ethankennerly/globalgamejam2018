@@ -2,6 +2,7 @@ using Finegamedesign.Utils;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace Finegamedesign.Tiles
 {
@@ -11,19 +12,27 @@ namespace Finegamedesign.Tiles
 
         private float speed = 2f;
 
+        private Tilemap m_WallMap;
+
         public MobileTileSystem()
         {
             DeltaTimeSystem.onDeltaTime += Update;
-            MobileTile.onEnable += OnEnable;
+            MobileTile.onEnable += OnEnableMobileTile;
+            MobileTile.onDisable += OnDisableMobileTile;
+            WallMap.onEnable += OnEnableWallMap;
+            WallMap.onDisable += OnDisableWallMap;
         }
 
         ~MobileTileSystem()
         {
             DeltaTimeSystem.onDeltaTime -= Update;
-            MobileTile.onEnable -= OnEnable;
+            MobileTile.onEnable -= OnEnableMobileTile;
+            MobileTile.onDisable -= OnDisableMobileTile;
+            WallMap.onEnable -= OnEnableWallMap;
+            WallMap.onDisable -= OnDisableWallMap;
         }
 
-        public void OnEnable(MobileTile mobile)
+        public void OnEnableMobileTile(MobileTile mobile)
         {
             if (m_Mobiles.Contains(mobile))
             {
@@ -32,9 +41,19 @@ namespace Finegamedesign.Tiles
             m_Mobiles.Add(mobile);
         }
 
-        public void OnDisable(MobileTile mobile)
+        public void OnDisableMobileTile(MobileTile mobile)
         {
             m_Mobiles.Remove(mobile);
+        }
+
+        private void OnEnableWallMap(WallMap map)
+        {
+            m_WallMap = map.tilemap;
+        }
+
+        private void OnDisableWallMap(WallMap map)
+        {
+            m_WallMap = null;
         }
 
         public void OnCollision(MobileTile mobile)
@@ -61,6 +80,10 @@ namespace Finegamedesign.Tiles
             if (mobile == null)
             {
                 return;
+            }
+            if (!mobile.isColliding)
+            {
+                mobile.isColliding = HasTileInFront(m_WallMap, mobile);
             }
             if (mobile.isColliding)
             {
@@ -93,6 +116,36 @@ namespace Finegamedesign.Tiles
             v.x = (cos * tx) - (sin * ty);
             v.y = (sin * tx) + (cos * ty);
             return v;
+        }
+
+        private static bool HasTileInFront(Tilemap tilemap, MobileTile mobile)
+        {
+            return HasTile(tilemap, GetInFront(mobile));
+        }
+
+        private static Vector3 GetInFront(MobileTile mobile)
+        {
+            Vector3 position = mobile.transform.position;
+            position = new Vector3(position.x, position.y, position.z);
+            Vector2 velocity = new Vector2(mobile.velocity.x, mobile.velocity.y);
+            position.x += velocity.x;
+            position.y += velocity.y;
+            return position;
+        }
+
+        private static bool HasTile(Tilemap tilemap, Vector3 position)
+        {
+            if (tilemap == null)
+            {
+                return false;
+            }
+            position.z = tilemap.transform.position.z;
+            Vector3Int cell = tilemap.WorldToCell(position);
+            if (!tilemap.HasTile(cell))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
