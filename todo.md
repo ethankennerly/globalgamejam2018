@@ -31,21 +31,20 @@
     - [x] Disables tapping for one second.
 - [x] Hear loop, place germ, end.
 - [x] Fade out loop on end.
+- [x] Conveniently edit horizontal and vertical person with a prefab.
+- [x] Always restarts and reloads scene.
+- [x] Any player can always end play.
+    - [x] Only tap on person.
+    - [ ] Person covers everywhere.
+    - [ ] A virus can be replaced again if it hasn't been picked up already.
 
 # To do
 
-- [ ] Conveniently edit horizontal and vertical person with a prefab.
-- [ ] Always restarts and reloads scene.
-- [ ] Any player can always end play.
-    - [ ] Only tap on person.
-    - [ ] Person covers everywhere.
-    - [ ] A virus can be replaced again if it hasn't been picked up already.
 - [ ] End screen, score number of people sick.
 - [ ] End screen, score by how many seconds it took them to get everyone in the restaurant sick.
 - [ ] Animates person with copies of virus.
 - [ ] People do not get stuck in a corner.
-- [ ] Level 2.
-- [ ] Read how many infected.
+- [ ] If get all sick, Level 2.
 - [ ] Read best time.
 - [ ] When bump into something, person turns right.
 

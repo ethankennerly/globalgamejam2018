@@ -12,16 +12,32 @@ namespace Finegamedesign.Tiles
 
         private Tilemap m_Tilemap;
 
+        private readonly bool m_SpawnAnywhere = false;
+
         public ClickSpawnSystem()
         {
-            ClickPointSystem.onWorld += TrySpawn;
+            if (m_SpawnAnywhere)
+            {
+                ClickPointSystem.onWorld += TrySpawn;
+            }
+            else
+            {
+                ClickPointSystem.onCollisionEnter2D += TrySpawnOnMobileTile;
+            }
             InventoryObject.onEnable += OnEnable;
             SpawnMap.onEnable += OnEnable;
         }
 
         ~ClickSpawnSystem()
         {
-            ClickPointSystem.onWorld -= TrySpawn;
+            if (m_SpawnAnywhere)
+            {
+                ClickPointSystem.onWorld -= TrySpawn;
+            }
+            else
+            {
+                ClickPointSystem.onCollisionEnter2D -= TrySpawnOnMobileTile;
+            }
             InventoryObject.onEnable -= OnEnable;
             SpawnMap.onEnable += OnEnable;
         }
@@ -50,13 +66,32 @@ namespace Finegamedesign.Tiles
             m_Tilemap = null;
         }
 
-        public void TrySpawn(Vector3 position)
+        private void TrySpawn(Vector3 position)
         {
-            if (!ClickPointSystem.DisableTemporarily())
+            TrySpawnInventory(position);
+        }
+
+        // Only spawn if clicked mobile tile.
+        // Otherwise germ might be placed where no mobile tile goes.
+        // Then the level will not end.
+        private void TrySpawnOnMobileTile(Collider2D collider)
+        {
+            if (collider == null
+                || collider.gameObject == null
+                || collider.gameObject.GetComponent<MobileTile>() == null)
             {
                 return;
             }
+            TrySpawnInventory(collider.transform.position);
+        }
+
+        private void TrySpawnInventory(Vector3 position)
+        {
             if (!SetTilePosition(m_Tilemap, ref position))
+            {
+                return;
+            }
+            if (!ClickPointSystem.DisableTemporarily())
             {
                 return;
             }
