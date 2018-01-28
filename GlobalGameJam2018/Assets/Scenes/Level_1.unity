@@ -226,11 +226,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 20359471660133936, guid: b6a8168f771a84946b1e26f3edd6fec2,
-        type: 2}
-      propertyPath: orthographic size
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b6a8168f771a84946b1e26f3edd6fec2, type: 2}
   m_IsPrefabParent: 0
@@ -578,6 +573,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114969612196863252, guid: 773355b4effc6664b81b6203a1a8139b,
+        type: 2}
+      propertyPath: m_TimeTextMeshes.Array.data[0]
+      value: 
+      objectReference: {fileID: 1828682356}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 773355b4effc6664b81b6203a1a8139b, type: 2}
   m_IsPrefabParent: 0
@@ -3366,3 +3366,8 @@ Tilemap:
     m_DirtyIndex: 0
   - serializedVersion: 1
     m_DirtyIndex: 0
+--- !u!102 &1828682356 stripped
+TextMesh:
+  m_PrefabParentObject: {fileID: 102686835226633546, guid: b6a8168f771a84946b1e26f3edd6fec2,
+    type: 2}
+  m_PrefabInternal: {fileID: 500727809}

@@ -33,7 +33,7 @@ namespace Finegamedesign.Utils
         private static Vector3 s_Viewport = new Vector3();
         private static Vector2 s_Axis = new Vector2();
 
-        private static bool s_IsVerbose = true;
+        private static bool s_IsVerbose = false;
 
         // Caches time to ignore multiple calls per frame.
         //

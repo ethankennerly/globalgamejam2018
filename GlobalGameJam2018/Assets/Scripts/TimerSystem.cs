@@ -14,7 +14,7 @@ namespace Finegamedesign.Virus
 
         private bool m_IsGameOver = false;
 
-        private bool m_IsVerbose = true;
+        private bool m_IsVerbose = false;
 
         public TimerSystem()
         {
@@ -34,7 +34,8 @@ namespace Finegamedesign.Virus
         }
 
         // Guards if game over then restart.
-        // Otherwise, an animation race may register a tap on start button from end screen.
+        // Otherwise, a race may register a tap
+        // if start button is accidentally attached to the end screen.
         private void StartTimer(StartButton button)
         {
             if (m_IsGameOver)

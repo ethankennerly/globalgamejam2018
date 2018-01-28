@@ -29,6 +29,11 @@ namespace Finegamedesign.Virus
                 return;
             }
             AnimateCount(virus.animator, currentCount);
+            if (virus.host == null)
+            {
+                return;
+            }
+            AnimateCount(virus.host.animator, currentCount);
         }
 
         private bool DestroyIfFatal(Virus virus)

@@ -37,11 +37,11 @@
     - [x] Only tap on person.
     - [ ] Person covers everywhere.
     - [ ] A virus can be replaced again if it hasn't been picked up already.
+- [x] End screen, score number of people sick.
+- [x] End screen, score by how many seconds it took them to get everyone in the restaurant sick.
 
 # To do
 
-- [ ] End screen, score number of people sick.
-- [ ] End screen, score by how many seconds it took them to get everyone in the restaurant sick.
 - [ ] Animates person with copies of virus.
 - [ ] People do not get stuck in a corner.
 - [ ] If get all sick, Level 2.
