@@ -88,9 +88,19 @@ namespace Finegamedesign.Tiles
             if (mobile.isColliding)
             {
                 mobile.isColliding = false;
+                Snap(mobile.transform, -mobile.velocity * deltaTime);
                 mobile.velocity = Rotate(mobile.velocity, 180f);
             }
             Move(mobile.transform, mobile.velocity, deltaTime * speed);
+        }
+
+        // Avoid getting stuck to wall.
+        private static void Snap(Transform transform, Vector2 offset, float snapDistance = 0.1f)
+        {
+            Vector3 snap = transform.position;
+            snap.x = Mathf.Round((offset.x + snap.x) / snapDistance) * snapDistance;
+            snap.y = Mathf.Round((offset.x + snap.y) / snapDistance) * snapDistance;
+            transform.position = snap;
         }
 
         private static void Move(Transform transform, Vector2 velocity, float deltaTime)
@@ -120,7 +130,8 @@ namespace Finegamedesign.Tiles
 
         private static bool HasTileInFront(Tilemap tilemap, MobileTile mobile)
         {
-            return HasTile(tilemap, GetInFront(mobile, 0.75f));
+            Vector3 front = GetInFront(mobile, 0.75f);
+            return HasTile(tilemap, front);
         }
 
         private static Vector3 GetInFront(MobileTile mobile, float distance)
@@ -148,6 +159,14 @@ namespace Finegamedesign.Tiles
                 return false;
             }
             return true;
+        }
+
+        // Causes mobiles to follow each other.
+        private static bool HasCollider2D(Vector3 point, GameObject ignoredObject)
+        {
+            Vector2 origin = new Vector2(point.x, point.y);
+            RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.zero);
+            return hit != null && hit.collider != null && hit.collider.gameObject != ignoredObject;
         }
     }
 }

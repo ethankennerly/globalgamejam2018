@@ -40,12 +40,15 @@
 - [x] End screen, score number of people sick.
 - [x] End screen, score by how many seconds it took them to get everyone in the restaurant sick.
 - [x] Animates person with copies of virus.
+- [x] People do not get stuck in a corner.
+    - [x] When arriving at next tile, check if following tile is obstructed.
+- [x] Lower loop volume.
+- [x] Level 2.
+- [x] Level 3.
 
 # To do
 
-- [ ] People do not get stuck in a corner.
-    - [ ] When arriving at next tile, check if following tile is obstructed.
-- [ ] Lower loop volume.
+- [ ] People do not get stuck next to each other.
 - [ ] If get all sick, Level 2.
 - [ ] Read best time.
 - [ ] When bump into something, person turns right.
