@@ -22,11 +22,11 @@ namespace Finegamedesign.Virus
             }
             set
             {
+                value = Mathf.Clamp(value, m_Min, m_Max);
                 if (m_Count == value)
                 {
                     return;
                 }
-                value = Mathf.Clamp(value, m_Min, m_Max);
                 int previousCount = m_Count;
                 m_Count = value;
                 if (onCountChanged == null)
