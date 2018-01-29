@@ -10,10 +10,10 @@ namespace Finegamedesign.Virus
     public sealed class TimerSystem
     {
         public static event Action<string> onSceneChanged;
-        public static event Action onStartTimer;
+        public static event Action onTimerStarted;
+        public static event Action onTimerEnded;
 
-        public Animator animator { get; set; }
-        public string[] sceneNames { get; set; }
+        private string[] m_SceneNames;
 
         private int m_SceneIndex = 0;
 
@@ -26,6 +26,7 @@ namespace Finegamedesign.Virus
             StartButton.onClick += StartTimer;
             RestartButton.onClick += NextScene;
             ReplicationSystem.onAllDied += EndTimer;
+            TimerSystemView.onSceneNamesEnabled += SetSceneNames;
             ClickPointSystem.disabledDuration = 1f;
             m_IsGameOver = false;
             SetGamePlaying(false);
@@ -36,11 +37,7 @@ namespace Finegamedesign.Virus
             StartButton.onClick -= StartTimer;
             RestartButton.onClick += NextScene;
             ReplicationSystem.onAllDied -= EndTimer;
-        }
-
-        public void UpdateSceneName()
-        {
-            SetSceneName(SceneManager.GetActiveScene().name);
+            TimerSystemView.onSceneNamesEnabled += SetSceneNames;
         }
 
         // Guards if game over then restart.
@@ -56,16 +53,12 @@ namespace Finegamedesign.Virus
             {
                 Debug.Log("TimerSystems.TimerSystems.StartTimer");
             }
-            if (animator != null)
-            {
-                animator.Play("begin");
-            }
             SetGamePlaying(true);
-            if (onStartTimer == null)
+            if (onTimerStarted == null)
             {
                 return;
             }
-            onStartTimer();
+            onTimerStarted();
         }
 
         private void EndTimer()
@@ -80,11 +73,16 @@ namespace Finegamedesign.Virus
             }
             m_IsGameOver = true;
             SetGamePlaying(false);
-            if (animator == null)
+            if (onTimerEnded == null)
             {
                 return;
             }
-            animator.Play("end");
+            onTimerEnded();
+        }
+
+        private void SetGamePlaying(bool isGamePlaying)
+        {
+            DeltaTimeSystem.paused = !isGamePlaying;
         }
 
         private void NextScene(RestartButton button = null)
@@ -95,16 +93,35 @@ namespace Finegamedesign.Virus
             }
             m_IsGameOver = false;
             SetGamePlaying(false);
+            if (m_SceneNames == null || m_SceneNames.Length == 0)
+            {
+                LoadScene(SceneManager.GetActiveScene().name);
+                return;
+            }
             ++m_SceneIndex;
-            if (m_SceneIndex >= sceneNames.Length)
+            if (m_SceneIndex >= m_SceneNames.Length)
             {
                 m_SceneIndex = 0;
             }
-            string sceneName = sceneNames[m_SceneIndex];
+            string sceneName = m_SceneNames[m_SceneIndex];
+            LoadScene(sceneName);
+        }
+
+        private void LoadScene(string sceneName)
+        {
             SceneManager.LoadScene(sceneName);
             SetSceneName(sceneName);
-            m_IsGameOver = false;
-            SetGamePlaying(false);
+        }
+
+        private void SetSceneNames(string[] sceneNames)
+        {
+            m_SceneNames = sceneNames;
+            UpdateSceneName();
+        }
+
+        private void UpdateSceneName()
+        {
+            SetSceneName(SceneManager.GetActiveScene().name);
         }
 
         private void SetSceneName(string sceneName)
@@ -114,11 +131,6 @@ namespace Finegamedesign.Virus
                 return;
             }
             onSceneChanged(sceneName);
-        }
-
-        private void SetGamePlaying(bool isGamePlaying)
-        {
-            DeltaTimeSystem.paused = !isGamePlaying;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Finegamedesign.Virus
             Virus.onEnable += OnEnable;
             Virus.onDisable += OnDisable;
             DeltaTimeSystem.onDeltaTime += Update;
-            TimerSystem.onStartTimer += Reset;
+            TimerSystem.onTimerStarted += Reset;
         }
 
         ~ReplicationSystem()
@@ -27,7 +27,7 @@ namespace Finegamedesign.Virus
             Virus.onEnable -= OnEnable;
             Virus.onDisable -= OnDisable;
             DeltaTimeSystem.onDeltaTime -= Update;
-            TimerSystem.onStartTimer -= Reset;
+            TimerSystem.onTimerStarted -= Reset;
         }
 
         private void Reset()
