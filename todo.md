@@ -45,11 +45,11 @@
 - [x] Lower loop volume.
 - [x] Level 2.
 - [x] Level 3.
+- [x] People do not get stuck next to each other.
 
 # To do
 
-- [ ] People do not get stuck next to each other.
-- [ ] If get all sick, Level 2.
+- [ ] If get all sick, next level, otherwise this level.
 - [ ] Read best time.
 - [ ] When bump into something, person turns right.
 
