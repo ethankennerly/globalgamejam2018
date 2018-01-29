@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace Finegamedesign.Virus
 {
-    public sealed class TimerSystem : System<TimerSystem>
+    public sealed class TimerSystem
     {
         public static event Action onStartTimer;
 

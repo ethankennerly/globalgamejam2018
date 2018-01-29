@@ -6,16 +6,17 @@ using UnityEngine.Tilemaps;
 
 namespace Finegamedesign.Tiles
 {
-    public class MobileTileSystem : System<MobileTileSystem>
+    public sealed class MobileTileSystem : System<MobileTileSystem>
     {
         private readonly List<MobileTile> m_Mobiles = new List<MobileTile>();
 
-        private float speed = 2f;
+        private float m_TimeScale = 2f;
 
         private Tilemap m_WallMap;
 
         public MobileTileSystem()
         {
+            Debug.Log("MobileTileSystem.Constructor");
             DeltaTimeSystem.onDeltaTime += Update;
             MobileTile.onEnable += OnEnableMobileTile;
             MobileTile.onDisable += OnDisableMobileTile;
@@ -38,11 +39,13 @@ namespace Finegamedesign.Tiles
             {
                 return;
             }
+            mobile.System = this;
             m_Mobiles.Add(mobile);
         }
 
         public void OnDisableMobileTile(MobileTile mobile)
         {
+            mobile.System = null;
             m_Mobiles.Remove(mobile);
         }
 
@@ -91,7 +94,7 @@ namespace Finegamedesign.Tiles
                 Snap(mobile.transform, -mobile.velocity * deltaTime);
                 mobile.velocity = Rotate(mobile.velocity, 180f);
             }
-            Move(mobile.transform, mobile.velocity, deltaTime * speed);
+            Move(mobile.transform, mobile.velocity, deltaTime * m_TimeScale);
         }
 
         // Avoid getting stuck to wall.

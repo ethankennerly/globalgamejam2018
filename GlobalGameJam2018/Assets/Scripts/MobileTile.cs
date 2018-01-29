@@ -11,6 +11,8 @@ namespace Finegamedesign.Tiles
         public bool isColliding;
         public Animator animator { get; private set; }
 
+        public MobileTileSystem System { get; set; }
+
         private void Awake()
         {
             animator = GetComponent<Animator>();
@@ -19,7 +21,11 @@ namespace Finegamedesign.Tiles
         // Moving parallel to a wall will stay in collision, not reenter.
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            MobileTileSystem.Instance.OnCollision(this);
+            if (System == null)
+            {
+                return;
+            }
+            System.OnCollision(this);
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Finegamedesign.Virus
 {
-    public class ReplicationSystem : System<ReplicationSystem>
+    public sealed class ReplicationSystem : System<ReplicationSystem>
     {
         public static event Action onAllDied;
 

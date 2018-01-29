@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Finegamedesign.Virus
 {
-    public class VirusCountAnimationSystem : System<VirusCountAnimationSystem>
+    public sealed class VirusCountAnimationSystem
     {
         public static event Action onFatal;
 
