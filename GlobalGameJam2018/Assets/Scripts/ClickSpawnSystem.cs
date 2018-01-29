@@ -8,6 +8,7 @@ namespace Finegamedesign.Tiles
 {
     public sealed class ClickSpawnSystem : System<ClickSpawnSystem>
     {
+        public static event Action<GameObject, Collider2D> onSpawnAtCollider;
         private List<InventoryObject> m_InventoryObjects = new List<InventoryObject>();
 
         private Tilemap m_Tilemap;
@@ -72,7 +73,16 @@ namespace Finegamedesign.Tiles
 
         private void TrySpawn(Vector3 position)
         {
-            TrySpawnInventory(position);
+            if (!SetTilePosition(m_Tilemap, ref position))
+            {
+                return;
+            }
+            InventoryObject inventory = TryTakeInventory();
+            if (inventory == null)
+            {
+                return;
+            }
+            GameObject.Instantiate(inventory.prefab, position, Quaternion.identity);
         }
 
         // Only spawn if clicked mobile tile.
@@ -86,18 +96,25 @@ namespace Finegamedesign.Tiles
             {
                 return;
             }
-            TrySpawnInventory(collider.transform.position);
-        }
-
-        private void TrySpawnInventory(Vector3 position)
-        {
-            if (!SetTilePosition(m_Tilemap, ref position))
+            InventoryObject inventory = TryTakeInventory();
+            if (inventory == null)
             {
                 return;
             }
-            if (!ClickPointSystem.DisableTemporarily())
+            GameObject cloneObject = GameObject.Instantiate(inventory.prefab,
+                collider.transform.position, Quaternion.identity);
+            if (onSpawnAtCollider == null)
             {
                 return;
+            }
+            onSpawnAtCollider(cloneObject, collider);
+        }
+
+        private InventoryObject TryTakeInventory()
+        {
+            if (!ClickPointSystem.DisableTemporarily())
+            {
+                return null;
             }
             foreach (InventoryObject inventory in m_InventoryObjects)
             {
@@ -106,8 +123,9 @@ namespace Finegamedesign.Tiles
                     continue;
                 }
                 --inventory.numItems;
-                GameObject.Instantiate(inventory.prefab, position, Quaternion.identity);
+                return inventory;
             }
+            return null;
         }
 
         private static bool SetTilePosition(Tilemap tilemap, ref Vector3 position, float offsetZ = -0.01f)

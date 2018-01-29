@@ -6,32 +6,44 @@ using UnityEngine;
 
 namespace Finegamedesign.Virus
 {
-    public sealed class TransmissionSystem
+    public sealed class TransmissionSystem : System<TransmissionSystem>
     {
         public TransmissionSystem()
         {
             Virus.onTrigger += TryTransmit;
+            ClickSpawnSystem.onSpawnAtCollider += TryTransmitObject;
         }
 
         ~TransmissionSystem()
         {
             Virus.onTrigger -= TryTransmit;
+            ClickSpawnSystem.onSpawnAtCollider -= TryTransmitObject;
+        }
+
+        private static void TryTransmitObject(GameObject cloneObject, Collider2D potentialHost)
+        {
+            Virus virus = cloneObject.GetComponent<Virus>();
+            TransmissionSystem.TryTransmit(virus, potentialHost);
         }
 
         // Only subtracts from original virus when branching.
-        private void TryTransmit(Virus virus, Collider2D other)
+        private static void TryTransmit(Virus virus, Collider2D potentialHost)
         {
+            if (virus == null)
+            {
+                return;
+            }
             if (virus.host != null && virus.count < 2)
             {
                 return;
             }
-            MobileTile mobile = other.gameObject.GetComponent<MobileTile>();
+            MobileTile mobile = potentialHost.gameObject.GetComponent<MobileTile>();
             if (mobile == null)
             {
                 return;
             }
-            Virus otherVirus = other.gameObject.GetComponentInChildren<Virus>();
-            if (otherVirus == null)
+            Virus potentialHostVirus = potentialHost.gameObject.GetComponentInChildren<Virus>();
+            if (potentialHostVirus == null)
             {
                 GameObject cloneObject;
                 Virus clone;
@@ -47,22 +59,22 @@ namespace Finegamedesign.Virus
                     clone = virus;
                 }
                 clone.host = mobile;
-                cloneObject.transform.SetParent(other.gameObject.transform);
+                cloneObject.transform.SetParent(potentialHost.gameObject.transform);
                 cloneObject.transform.localPosition = new Vector3(0f, 0f, -0.01f);
                 return;
             }
-            if (virus.count == otherVirus.count)
+            if (virus.count == potentialHostVirus.count)
             {
                 return;
             }
-            if (virus.count < otherVirus.count)
+            if (virus.count < potentialHostVirus.count)
             {
                 Virus swap = virus;
-                virus = otherVirus;
-                otherVirus = swap;
+                virus = potentialHostVirus;
+                potentialHostVirus = swap;
             }
             virus.count--;
-            otherVirus.count++;
+            potentialHostVirus.count++;
         }
     }
 }

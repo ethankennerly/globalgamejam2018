@@ -16,7 +16,6 @@ namespace Finegamedesign.Tiles
 
         public MobileTileSystem()
         {
-            Debug.Log("MobileTileSystem.Constructor");
             DeltaTimeSystem.onDeltaTime += Update;
             MobileTile.onEnable += OnEnableMobileTile;
             MobileTile.onDisable += OnDisableMobileTile;

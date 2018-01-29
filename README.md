@@ -7,6 +7,8 @@ Theme "Transmission," in Global Game Jam 2018, January 26-28.
 - Art: Cindy Lee
 - Audio: Matthew Frederick Chin
 - Engineering: Ethan Kennerly
+- Playtesters: Jennifer Russ, Steve Hart, Jonathan and Greg at Noisebridge
+- Host:  Noisebridge
 
 Play on WebGL here:
 
