@@ -1,17 +1,23 @@
 using Finegamedesign.Utils;
+using System;
 using UnityEngine;
 
 namespace Finegamedesign.Tiles
 {
     public sealed class MobileTile : AEnableBehaviour<MobileTile>
     {
-        public float arrivalTime;
-        public float nextTileSpeed;
-        public Vector2 velocity = new Vector2(1f, 0f);
-        public bool isColliding;
-        public Animator animator { get; private set; }
+        public static event Action<MobileTile> onCollision;
+        public static event Action<MobileTile> onTrigger;
 
-        public MobileTileSystem System { get; set; }
+        public Vector2 velocity = new Vector2(1f, 0f);
+
+        [HideInInspector]
+        public bool isColliding;
+
+        [HideInInspector]
+        public Collider2D frontTrigger;
+
+        public Animator animator { get; private set; }
 
         private void Awake()
         {
@@ -21,11 +27,34 @@ namespace Finegamedesign.Tiles
         // Moving parallel to a wall will stay in collision, not reenter.
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (System == null)
+            if (collision.collider == null
+                || collision.collider.isTrigger
+                || collision.otherCollider == null
+                || collision.otherCollider.isTrigger
+                || collision.collider.gameObject == collision.otherCollider.gameObject)
             {
                 return;
             }
-            System.OnCollision(this);
+            if (onCollision == null)
+            {
+                return;
+            }
+            onCollision(this);
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other == null
+                || other.isTrigger
+                || other.gameObject == gameObject)
+            {
+                return;
+            }
+            if (onTrigger == null)
+            {
+                return;
+            }
+            onTrigger(this);
         }
     }
 }

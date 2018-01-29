@@ -12,15 +12,13 @@ namespace Finegamedesign.Tiles
 
         private float m_TimeScale = 2f;
 
-        private Tilemap m_WallMap;
-
         public MobileTileSystem()
         {
             DeltaTimeSystem.onDeltaTime += Update;
             MobileTile.onEnable += OnEnableMobileTile;
             MobileTile.onDisable += OnDisableMobileTile;
-            WallMap.onEnable += OnEnableWallMap;
-            WallMap.onDisable += OnDisableWallMap;
+            MobileTile.onCollision += OnCollision;
+            MobileTile.onTrigger += OnCollision;
         }
 
         ~MobileTileSystem()
@@ -28,8 +26,8 @@ namespace Finegamedesign.Tiles
             DeltaTimeSystem.onDeltaTime -= Update;
             MobileTile.onEnable -= OnEnableMobileTile;
             MobileTile.onDisable -= OnDisableMobileTile;
-            WallMap.onEnable -= OnEnableWallMap;
-            WallMap.onDisable -= OnDisableWallMap;
+            MobileTile.onCollision -= OnCollision;
+            MobileTile.onTrigger -= OnCollision;
         }
 
         public void OnEnableMobileTile(MobileTile mobile)
@@ -38,24 +36,14 @@ namespace Finegamedesign.Tiles
             {
                 return;
             }
-            mobile.System = this;
+            mobile.frontTrigger = GetTrigger(mobile.gameObject);
+            AlignFrontTrigger(mobile);
             m_Mobiles.Add(mobile);
         }
 
         public void OnDisableMobileTile(MobileTile mobile)
         {
-            mobile.System = null;
             m_Mobiles.Remove(mobile);
-        }
-
-        private void OnEnableWallMap(WallMap map)
-        {
-            m_WallMap = map.tilemap;
-        }
-
-        private void OnDisableWallMap(WallMap map)
-        {
-            m_WallMap = null;
         }
 
         public void OnCollision(MobileTile mobile)
@@ -83,16 +71,13 @@ namespace Finegamedesign.Tiles
             {
                 return;
             }
-            if (!mobile.isColliding)
-            {
-                mobile.isColliding = HasTileInFront(m_WallMap, mobile);
-            }
             if (mobile.isColliding)
             {
                 mobile.isColliding = false;
                 Snap(mobile.transform, -mobile.velocity * deltaTime);
-                mobile.velocity = Rotate(mobile.velocity, 180f);
+                Rotate(mobile, 180f);
             }
+            AlignFrontTrigger(mobile);
             Move(mobile.transform, mobile.velocity, deltaTime * m_TimeScale);
         }
 
@@ -113,6 +98,43 @@ namespace Finegamedesign.Tiles
             transform.position = position;
         }
 
+        private static void Rotate(MobileTile mobile, float degrees)
+        {
+            mobile.velocity = Rotate(mobile.velocity, degrees);
+            AlignFrontTrigger(mobile);
+        }
+
+        private static Collider2D GetTrigger(GameObject gameObject)
+        {
+            if (gameObject == null)
+            {
+                return null;
+            }
+            Collider2D[] colliders = gameObject.GetComponents<Collider2D>();
+            foreach (Collider2D collider in colliders)
+            {
+                if (collider.isTrigger)
+                {
+                    return collider;
+                }
+            }
+            return null;
+        }
+
+        private static void AlignFrontTrigger(MobileTile mobile)
+        {
+            if (mobile.frontTrigger == null)
+            {
+                return;
+            }
+            mobile.frontTrigger.offset = Align(mobile.frontTrigger.offset, mobile.velocity);
+        }
+
+        private static Vector2 Align(Vector2 follower, Vector2 target)
+        {
+            return target.normalized * follower.magnitude;
+        }
+
         // Copied from:
         // https://answers.unity.com/questions/661383/whats-the-most-efficient-way-to-rotate-a-vector2-o.html
         // Other solutions there were:
@@ -128,47 +150,6 @@ namespace Finegamedesign.Tiles
             v.x = (cos * tx) - (sin * ty);
             v.y = (sin * tx) + (cos * ty);
             return v;
-        }
-
-        private static bool HasTileInFront(Tilemap tilemap, MobileTile mobile)
-        {
-            Vector3 front = GetInFront(mobile, 0.75f);
-            return HasTile(tilemap, front);
-        }
-
-        private static Vector3 GetInFront(MobileTile mobile, float distance)
-        {
-            Vector3 position = mobile.transform.position;
-            position = new Vector3(position.x, position.y, position.z);
-            Vector2 velocity = new Vector2(mobile.velocity.x, mobile.velocity.y);
-            velocity.Normalize();
-            velocity *= distance;
-            position.x += velocity.x;
-            position.y += velocity.y;
-            return position;
-        }
-
-        private static bool HasTile(Tilemap tilemap, Vector3 position)
-        {
-            if (tilemap == null)
-            {
-                return false;
-            }
-            position.z = tilemap.transform.position.z;
-            Vector3Int cell = tilemap.WorldToCell(position);
-            if (!tilemap.HasTile(cell))
-            {
-                return false;
-            }
-            return true;
-        }
-
-        // Causes mobiles to follow each other.
-        private static bool HasCollider2D(Vector3 point, GameObject ignoredObject)
-        {
-            Vector2 origin = new Vector2(point.x, point.y);
-            RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.zero);
-            return hit != null && hit.collider != null && hit.collider.gameObject != ignoredObject;
         }
     }
 }

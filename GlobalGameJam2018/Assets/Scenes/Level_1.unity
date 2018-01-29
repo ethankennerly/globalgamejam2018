@@ -491,7 +491,7 @@ Prefab:
     - target: {fileID: 224131489026452328, guid: 773355b4effc6664b81b6203a1a8139b,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 307.5
+      value: 285.5
       objectReference: {fileID: 0}
     - target: {fileID: 224131489026452328, guid: 773355b4effc6664b81b6203a1a8139b,
         type: 2}
@@ -578,6 +578,15 @@ Prefab:
       propertyPath: m_TimeTextMeshes.Array.data[0]
       value: 
       objectReference: {fileID: 1828682356}
+    - target: {fileID: 82846984841508304, guid: 773355b4effc6664b81b6203a1a8139b,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542175390596578, guid: 773355b4effc6664b81b6203a1a8139b, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 773355b4effc6664b81b6203a1a8139b, type: 2}
   m_IsPrefabParent: 0
@@ -2611,7 +2620,7 @@ Prefab:
     - target: {fileID: 114118701600989484, guid: 2402036f97d5ad941a940567570b0d12,
         type: 2}
       propertyPath: velocity.y
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2402036f97d5ad941a940567570b0d12, type: 2}
