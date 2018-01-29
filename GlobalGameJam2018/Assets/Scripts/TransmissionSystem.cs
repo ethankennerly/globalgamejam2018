@@ -18,7 +18,7 @@ namespace Finegamedesign.Virus
             Virus.onTrigger -= TryTransmit;
         }
 
-        // Does
+        // Only subtracts from original virus when branching.
         private void TryTransmit(Virus virus, Collider2D other)
         {
             if (virus.host != null && virus.count < 2)
@@ -33,11 +33,11 @@ namespace Finegamedesign.Virus
             Virus otherVirus = other.gameObject.GetComponentInChildren<Virus>();
             if (otherVirus == null)
             {
-                virus.count--;
                 GameObject cloneObject;
                 Virus clone;
-                if (virus.count > 0)
+                if (virus.count > 1)
                 {
+                    virus.count--;
                     cloneObject = GameObject.Instantiate(virus.gameObject);
                     clone = cloneObject.GetComponent<Virus>();
                 }
