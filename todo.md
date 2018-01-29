@@ -47,6 +47,7 @@
 - [x] Level 3.
 - [x] People do not get stuck next to each other.
 - [x] Steve Hart expects to infect nearest mobile object, not the one above.
+- [x] Read level on start screen.
 
 # To do
 

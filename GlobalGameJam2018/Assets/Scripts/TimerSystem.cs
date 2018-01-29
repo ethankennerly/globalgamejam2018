@@ -2,12 +2,14 @@ using Finegamedesign.Utils;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 namespace Finegamedesign.Virus
 {
     public sealed class TimerSystem
     {
+        public static event Action<string> onSceneChanged;
         public static event Action onStartTimer;
 
         public Animator animator { get; set; }
@@ -34,6 +36,11 @@ namespace Finegamedesign.Virus
             StartButton.onClick -= StartTimer;
             RestartButton.onClick += NextScene;
             ReplicationSystem.onAllDied -= EndTimer;
+        }
+
+        public void UpdateSceneName()
+        {
+            SetSceneName(SceneManager.GetActiveScene().name);
         }
 
         // Guards if game over then restart.
@@ -93,9 +100,20 @@ namespace Finegamedesign.Virus
             {
                 m_SceneIndex = 0;
             }
-            SceneManager.LoadScene(sceneNames[m_SceneIndex]);
+            string sceneName = sceneNames[m_SceneIndex];
+            SceneManager.LoadScene(sceneName);
+            SetSceneName(sceneName);
             m_IsGameOver = false;
             SetGamePlaying(false);
+        }
+
+        private void SetSceneName(string sceneName)
+        {
+            if (onSceneChanged == null)
+            {
+                return;
+            }
+            onSceneChanged(sceneName);
         }
 
         private void SetGamePlaying(bool isGamePlaying)
