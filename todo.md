@@ -48,9 +48,12 @@
 - [x] People do not get stuck next to each other.
 - [x] Steve Hart expects to infect nearest mobile object, not the one above.
 - [x] Read level on start screen.
+- [x] Cursor hotspot at center.
 
 # To do
 
+- [ ] Jennifer expects to not see three characters do not get stuck bouncing of each other.
+    - [ ] If collision on side, continue direction.
 - [ ] If get all sick, next level, otherwise this level.
 - [ ] Read best time.
 - [ ] When bump into something, person turns right.

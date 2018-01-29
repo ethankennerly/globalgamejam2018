@@ -23,11 +23,10 @@ namespace Finegamedesign.Virus
             TimerSystem.onSceneChanged += SetSceneName;
             TimerSystem.onTimerStarted += AnimateStartLevel;
             TimerSystem.onTimerEnded += AnimateEndLevel;
-            if (onSceneNamesEnabled == null)
+            if (onSceneNamesEnabled != null)
             {
-                return;
+                onSceneNamesEnabled(m_SceneNames);
             }
-            onSceneNamesEnabled(m_SceneNames);
         }
 
         private void OnDisable()
