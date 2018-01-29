@@ -27,6 +27,10 @@ namespace Finegamedesign.Virus
         }
 
         // Only subtracts from original virus when branching.
+        //
+        // Virus link follows the host.
+        // Does not add virus as child, because Unity merges child triggers with parent.
+        // https://answers.unity.com/questions/410711/trigger-in-child-object-calls-ontriggerenter-in-pa.html
         private static void TryTransmit(Virus virus, Collider2D potentialHost)
         {
             if (virus == null)
@@ -42,8 +46,8 @@ namespace Finegamedesign.Virus
             {
                 return;
             }
-            Virus potentialHostVirus = potentialHost.gameObject.GetComponentInChildren<Virus>();
-            if (potentialHostVirus == null)
+            VirusLink potentialHostVirusLink = potentialHost.gameObject.GetComponent<VirusLink>();
+            if (potentialHostVirusLink == null)
             {
                 GameObject cloneObject;
                 Virus clone;
@@ -59,10 +63,13 @@ namespace Finegamedesign.Virus
                     clone = virus;
                 }
                 clone.host = mobile;
-                cloneObject.transform.SetParent(potentialHost.gameObject.transform);
-                cloneObject.transform.localPosition = new Vector3(0f, 0f, -0.01f);
+                potentialHost.gameObject.AddComponent<VirusLink>();
+                potentialHostVirusLink = potentialHost.gameObject.GetComponent<VirusLink>();
+                potentialHostVirusLink.virus = clone;
+                cloneObject.transform.position = potentialHost.transform.position;
                 return;
             }
+            Virus potentialHostVirus = potentialHostVirusLink.virus;
             if (virus.count == potentialHostVirus.count)
             {
                 return;
